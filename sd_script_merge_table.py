@@ -13,8 +13,7 @@ def run_etl(tables):
     sd1 = ['insert  overwrite  table  '  +  i  +  
     
     ".shipment_detail_df  partition  (inc_day  =  '"  +  today  +  
-    """
-    ')  
+    """')  
     select  internal_shipment_line_num, 
     internal_shipment_num,
     allocation_rule,

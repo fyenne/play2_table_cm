@@ -13,8 +13,7 @@ def run_etl(tables):
     rh1 = ['insert overwrite table ' + i + 
 
     ".receipt_header_df partition (inc_day = '" + today + 
-    """
-    ')
+    """')
     Select 
     internal_receipt_num
     ,warehouse

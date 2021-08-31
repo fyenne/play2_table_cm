@@ -18,8 +18,7 @@ def run_etl(tables):
 
     ".shipment_header_df partition (inc_day = '" + today + 
 
-    """
-    ') 
+    """') 
     SELECT
         internal_shipment_num,
         warehouse,

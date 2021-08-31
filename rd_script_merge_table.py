@@ -10,13 +10,12 @@ def run_etl(tables):
     spark.conf.set('spark.sql.sources.partitionOverwriteMode',  'dynamic')
     today  =  str(date.today()-  timedelta(days=1)).replace('-','');print(today)
     names = tables.split(",")
-        
+    # names = 'ods_cn_bose'   
     rd1 = ['insert overwrite table ' + i + 
 
     ".receipt_detail_df partition (inc_day = '" + today + 
 
-    """
-    ') 
+    """') 
     Select
         internal_receipt_line_num,
         locating_rule,
