@@ -16,9 +16,7 @@ def run_etl(tables):
 
     sh1 = ['insert overwrite table ' + i + 
 
-    ".shipment_header_df partition (inc_day = '" + today + 
-
-    """') 
+    ".shipment_header_df partition (inc_day = '" + today + """') 
     SELECT
         internal_shipment_num,
         warehouse,
@@ -372,6 +370,8 @@ def run_etl(tables):
 
     
     sh2 = [i.replace('\n', '') for i in sh1]
+
+    print(sh2[2])
     [spark.sql(i) for i in sh2]
 
 

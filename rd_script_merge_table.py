@@ -13,9 +13,7 @@ def run_etl(tables):
     # names = 'ods_cn_bose'   
     rd1 = ['insert overwrite table ' + i + 
 
-    ".receipt_detail_df partition (inc_day = '" + today + 
-
-    """') 
+    """.receipt_detail_df partition (inc_day = '""" + today + """')
     Select
         internal_receipt_line_num,
         locating_rule,
@@ -200,6 +198,7 @@ def run_etl(tables):
 
 
     rd2 = [i.replace('\n', '') for i in rd1]
+    print(rd2[1])
     [spark.sql(i) for i in rd2]
 
 

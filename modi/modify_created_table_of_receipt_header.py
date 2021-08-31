@@ -16,27 +16,27 @@ receipt_header
 
 names = [
 'ods_cn_bose'
-# ,'ods_cn_apple_sz'
-# ,'ods_cn_apple_sh'
-# ,'ods_cn_costacoffee'
-# ,'ods_cn_diadora'
-# ,'ods_cn_ferrero'
-# ,'ods_cn_fuji'
-# ,'ods_cn_hd'
-# ,'ods_cn_hp_ljb'
-# ,'ods_cn_hpi'
-# ,'ods_cn_hualiancosta'
-# ,'ods_cn_jiq'
-# ,'ods_cn_kone'
-# ,'ods_cn_michelin'
-# ,'ods_cn_razer'
-# ,'ods_cn_squibb'
-# ,'ods_cn_vzug'
-# ,'ods_cn_zebra'
-# ,'ods_dbo'
-# ,'ods_hk_abbott'
-# ,'ods_hk_revlon'
-# ,'ods_hk_fredperry'
+,'ods_cn_apple_sz'
+,'ods_cn_apple_sh'
+,'ods_cn_costacoffee'
+,'ods_cn_diadora'
+,'ods_cn_ferrero'
+,'ods_cn_fuji'
+,'ods_cn_hd'
+,'ods_cn_hp_ljb'
+,'ods_cn_hpi'
+,'ods_cn_hualiancosta'
+,'ods_cn_jiq'
+,'ods_cn_kone'
+,'ods_cn_michelin'
+,'ods_cn_razer'
+,'ods_cn_squibb'
+,'ods_cn_vzug'
+,'ods_cn_zebra'
+,'ods_dbo'
+,'ods_hk_abbott'
+,'ods_hk_revlon'
+,'ods_hk_fredperry'
 ] 
 
 """
@@ -132,16 +132,20 @@ rh1 = ['CREATE EXTERNAL TABLE IF NOT EXISTS ' + i +
 COMMENT 'RECEIPT_HEADER' 
 PARTITIONED BY (`inc_day` string COMMENT '增量日期') 
 stored as parquet 
-LOCATION 'hdfs://dsc/hive/warehouse/dsc/ods/
+LOCATION 'hdfs://dsc/user/hive/warehouse/
 """
-+ i + "/receipt_detail_df'"
++ i + ".db/receipt_detail_df'"
 for i in names]
 # hdfs://dsc/hive/warehouse/dsc/ods/ods_cn_apple_sh/receipt_header
 
 
 rh2 = [i.replace('\n', '') for i in rh1]
 
-[spark.sql(i) for i in rh2]
+for i in rh2:
+    print("================================\t", i, "\t ================================")
+    spark.sql(i)
+
+
 
 
 
@@ -234,14 +238,16 @@ rd1 = ['CREATE EXTERNAL TABLE IF NOT EXISTS ' + i +
     ) COMMENT 'receipt-detail' 
     PARTITIONED BY (`inc_day` string COMMENT '增量日期') 
     STORED AS Parquet 
-    LOCATION 'hdfs://dsc/hive/warehouse/dsc/ods/
+    LOCATION 'hdfs://dsc/user/hive/warehouse/
 """
-+ i + "/receipt_detail_df'"
++ i + ".db/receipt_detail_df'"
 for i in names]
 
 rd2 = [i.replace('\n', '') for i in rd1]
-[spark.sql(i) for i in rd2]
 
+for i in rd2:
+    print("================================\t", i, "\t ================================")
+    spark.sql(i)
 
 
 
@@ -420,14 +426,17 @@ sh1 = ['CREATE EXTERNAL TABLE IF NOT EXISTS ' + i +
     ) COMMENT 'shipment - header' 
     PARTITIONED BY (`inc_day` string COMMENT '增量日期') 
     STORED AS Parquet 
-    LOCATION 'hdfs://dsc/hive/warehouse/dsc/ods/
+    LOCATION 'hdfs://dsc/user/hive/warehouse/
 """
  
-+ i + "/shipment_header_df'"
++ i + ".db/shipment_header_df'"
 for i in names]
 
 sh2 = [i.replace('\n', '') for i in sh1]
-[spark.sql(i) for i in sh2]
+for i in sh2:
+    print("================================\t ", i, "\t ================================")
+    spark.sql(i)
+
 
 
 sd1 = ['CREATE EXTERNAL TABLE IF NOT EXISTS ' + i + 
@@ -594,14 +603,17 @@ sd1 = ['CREATE EXTERNAL TABLE IF NOT EXISTS ' + i +
     ) COMMENT 'shipment - 发货' 
     PARTITIONED BY (`inc_day` string COMMENT '增量日期') 
     STORED AS Parquet 
-    LOCATION 'hdfs://dsc/hive/warehouse/dsc/ods/
+    LOCATION 'hdfs://dsc/user/hive/warehouse/
 """
-+ i + "/shipment_detail_df'"
++ i + ".db/shipment_detail_df'"
 for i in names]
 
 
 sd2 = [i.replace('\n', '') for i in sd1]
-[spark.sql(i) for i in sd2]
+
+for i in sd2:
+    print("================================\t", i, "\t ================================")
+    spark.sql(i)
 
 
 
@@ -613,11 +625,12 @@ sd2 = [i.replace('\n', '') for i in sd1]
     ) COMMENT 'receipt-detail' 
     PARTITIONED BY (`inc_day` string COMMENT '增量日期') 
     STORED AS Parquet 
-    LOCATION 'hdfs://dsc/hive/warehouse/dsc/ods/
+    LOCATION 'hdfs://dsc/user/hive/warehouse/
  
 + i + "/receipt_detail_df'"
 for i in names]
 
+'hdfs://dsc/user/hive/warehouse/ods_cn_bose.db/shipment_detail_df'
 """
 
 # names = [

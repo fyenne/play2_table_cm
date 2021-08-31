@@ -345,6 +345,7 @@ def run_etl(tables):
     for  i  in  names]
 
     sd2  =  [i.replace('\n',  '')  for  i  in  sd1]
+    print(sd2[2])
     [spark.sql(i)  for  i  in  sd2]
 
 

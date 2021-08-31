@@ -12,8 +12,7 @@ def run_etl(tables):
     names = tables.split(",")
     rh1 = ['insert overwrite table ' + i + 
 
-    ".receipt_header_df partition (inc_day = '" + today + 
-    """')
+    ".receipt_header_df partition (inc_day = '" + today + """')
     Select 
     internal_receipt_num
     ,warehouse
@@ -195,7 +194,9 @@ def run_etl(tables):
     ]
     
     rh2 = [i.replace('\n', '') for i in rh1]
+    print(rh2[2])
     [spark.sql(i) for i in rh2]
+
 
 
 def main():
