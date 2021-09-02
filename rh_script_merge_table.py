@@ -194,7 +194,7 @@ def run_etl(tables):
     ]
     
     rh2 = [i.replace('\n', '') for i in rh1]
-    print(rh2[2])
+    print(rh2[0])
     [spark.sql(i) for i in rh2]
 
 
