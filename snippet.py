@@ -7,7 +7,7 @@
 #                     ods_hk_fredperry
 # do
 # 	hive -e "create TABLE IF not EXISTS $VARIABLE.receipt_header_df AS SELECT *
- cast(null as string) as src_inc_day FROM ods_cn_bose.receipt_header where inc_day = '20210826'" 
+#  cast(null as string) as src_inc_day FROM ods_cn_bose.receipt_header where inc_day = '20210826'" 
 # done
  
  
